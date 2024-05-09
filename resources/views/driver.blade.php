@@ -1,11 +1,6 @@
-<html>
-    <head>
-        <title>Jezdci</title>
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-      <script src="{{ asset('js/app.js') }}" defer></script>
-    </head>
-        <body>
+@extends('layouts.app')
+@section('content')
+<title>Jezdci</title>
 <span class="header">
     <h1>Jezdci</h1>
 </span>
@@ -68,5 +63,4 @@
     </div>
   </div>
 </div>
-</body>
-</html>
+@endsection
