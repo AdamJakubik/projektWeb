@@ -5,15 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Driver;
 use App\Models\Country;
+use Config;
 use Illuminate\Support\Facades\DB;
 
 class DriverController extends Controller
 {
-    /**
-     * Zobrazí seznam jezdců s názvem země, kde bylo auto vyrobeno. Je využitý join který spojí "Country_id" v tabulce car s id v tabulce country.
-     *
-     * @return view 'car' s daty aut a názvy zemí, které jsou uložené v proměnné $data.
-     */
     public function driver()
     {
         $paginate = Config::get('pagination.pagination');
@@ -21,16 +17,11 @@ class DriverController extends Controller
         return view('driver', ['data' => $data]);
     }
     
-    /**
-     * Smaže auto podle daného ID a nastaví čas smazání v hodnotě int (sekundy).
-     * $id ID auta, které má být smazáno.
-     * return Vrací uživatele zpět na předchozí stránku s flash zprávou o úspěchu nebo chybě.
-     */
-    public function delete($id)
+    public function delete($id_driver)
     {
         try {
-            $car = Car::find($id);
-            $car->delete();   
+            $driver = Driver::find($id_driver);
+            $driver->delete();   
 
             // Flash zpráva informuje uživatele o úspěšném smazání auta.
             return back()->with('success', 'Smazání proběhlo úspěšně!');
@@ -40,26 +31,12 @@ class DriverController extends Controller
             return back()->with('error', 'Smazání se nepovedlo: ' . $e->getMessage());
         }
     }
-
-    /**
-     * Zobrazí formulář pro vytvoření nového auta. $date je využito pro to, aby se ve formuláři nedalo zadat datum které je větší než dnešek. 
-     *
-     * @return Vrací view 'create' s daty zemí a aktuálním datem.
-     */
     public function create()
     {
         $data = Country::all();
         $date = date("Y-m-d");
         return view('create', ['data' => $data, 'date' => $date]);
     }
-    
-    /**
-     * Uloží nové auto do databáze.
-     *
-     * @param  $request Data z formuláře pro vytvoření auta. Použita validace pro formulář, aby bylo povinné vybrat jiný řádek než je první v selectu (první řádek je disabled a je vybraný defaultně).
-     * @return  Vrací uživatele na view /car s flash zprávou o úspěchu nebo chybě.
-     * $car->save(); uloží data z formulářů do tabulky Car
-     */
     public function store(Request $request)
     {
         try {
