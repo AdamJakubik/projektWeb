@@ -1,1 +1,1 @@
-<img {{$attributes}} src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/F1.svg/2560px-F1.svg.png"></img>
+<img {{$attributes}} src="https://i.pinimg.com/originals/4c/ab/f1/4cabf11ca2754891d4d9d20326eca835.png"></img>
