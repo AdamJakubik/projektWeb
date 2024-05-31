@@ -1,6 +1,6 @@
 @extends('layouts.app')
+
 @section('content')
-<br>
 @if (session('success'))
     <br>
     <div class="alert alert-success">
@@ -11,6 +11,7 @@
 @endif
 
 @if (session('error'))
+
     <br>
     <div class="alert alert-danger">
         {{ session('error') }}
@@ -18,41 +19,35 @@
     <br>
     <br>
 @endif
-<br>
-<title>Jezdci</title>
-<span class="header">
-    <h1>Jezdci</h1>
-</span>
-<table class="table" >
-    <thead>
-        <tr>
-            <th>Jméno</th>
-            <th>Datum narození</th>
-            <th>Tituly mistra světa</th>
-            <th>Výhry</th>
-            <th>Podiums</th>
-            <th>DNF</th>
-            <th>Country</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach ($data as $item)
-            <tr>
-                <td>{{ $item->name}}</td>
-                <td>{{ $item->dateOfBirth}}</td>
-                <td>{{ $item->driverChampion}}</td>
-                <td>{{ $item->wins}}</td>
-                <td>{{ $item->podiums}}</td>
-                <td>{{ $item->dnfs}}</td>
-                <td>{{ $item->country_name}}</td>
-                <td class="border px-4 py-2"><button class="btn btn-outline btn-error" data-id="{{ $item->id_driver }}" onclick="setFormAction('{{ $item->id_driver }}')">Smazat</button></td>
-                <td class="border px-4 py-2"></td>
-                <td class="border px-4 py-2"><a href="/{{ $item->name }}/{{ $item->id_driver }}/edit" class="btn btn-outline btn-warning">Editovat</a></td>
-            </tr>
-        @endforeach
-    </tbody>
-</table>
-<div id="myModal" class="fixed z-10 inset-0 overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+
+    <br>
+        <br>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            @foreach ($data as $country)
+        
+
+            <div class="card w-full bg-base-100 shadow-xl">
+                    <figure>
+                        <img src="{{ asset('obrazky/' . $country->image) }}" alt="{{ $country->countryName }}" class="w-64 h-64 object-cover">
+                    </figure>
+                    <div class="card-body">
+                        <h2 class="card-title">
+                            {{ $country->countryName }}
+                        </h2>
+                        <p>ID: {{ $country->id_country }}</p>
+
+                                <div class="card-actions justify-end">
+                                
+                                    <button class="btn btn-outline btn-error" data-id="{{ $country->id_country }}" onclick="setFormAction('{{ $country->id_country }}')">Smazat</button>
+                                </div>
+                    </div>
+                </div>
+ 
+
+            @endforeach
+        </div>
+
+        <div id="myModal" class="fixed z-10 inset-0 overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
   <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
     <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
     <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">​</span>
@@ -72,8 +67,12 @@
       <form id="deleteForm" method="POST">
     @csrf
     @method('DELETE')
-    <button class="btn btn-outline btn-error" type="submit" id="deleteButton1">Smazat</button>
+    <button class="btn btn-outline btn-error" type="submit">Smazat</button>
 </form>
+
+
+
+
         &nbsp;&nbsp;&nbsp;
         <button type="button" class="btn btn-outline btn-primary" id="cancelButton">
   Zrušit
@@ -82,4 +81,9 @@
     </div>
   </div>
 </div>
+    <br>
+    <br>
+    <br>
+    
+    {{ $data->links() }}
 @endsection

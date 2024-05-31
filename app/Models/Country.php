@@ -8,7 +8,7 @@ class Country extends Model
 {
     protected $table = 'country'; 
     protected $primaryKey = 'id_country';
-    protected $fillable = ['Countryname']; 
+    protected $fillable = ['countryName']; 
     use SoftDeletes;
 
 }
