@@ -12,9 +12,11 @@ class DriverController extends Controller
 {
     public function driver()
     {
+        $winsum = Driver::sum('wins');
+        $champsum = Driver::sum('driverChampion');
         $paginate = Config::get('pagination.pagination');
         $data = Driver::join('country', 'driver.country_id_country', '=', 'country.id_country')->select('driver.*', 'country.countryName as country_name')->orderBy('driver.id_driver')->paginate($paginate);
-        return view('driver', ['data' => $data]);
+        return view('driver', ['data' => $data, 'winsum' => $winsum, 'champsum' => $champsum ]);
     }
     
     public function delete($id_driver)

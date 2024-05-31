@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app2')
 @section('content')
 <br>
 @if (session('success'))
@@ -20,9 +20,9 @@
 @endif
 <br>
 <title>Jezdci</title>
-<span class="header">
-    <h1>Jezdci</h1>
-</span>
+<h1>Celkový počet výher řidičů je {{ $winsum }}</h1>
+<h1>Celkový počet vyhraných šampionátů řidičů je {{ $champsum }}</h1>
+<br>
 <table class="table" >
     <thead>
         <tr>

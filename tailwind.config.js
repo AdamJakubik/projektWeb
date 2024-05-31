@@ -1,16 +1,23 @@
+const defaultTheme = require('tailwindcss/defaultTheme');
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    "./resources/**/*.blade.php",
-    "./resources/**/*.js",
-    "./resources/**/*.vue",
-  ],
-  daisyui:{
-    themes: ["synthwave"],
-  },
-  theme: {
-    extend: {},
-  },
-  plugins: [require('daisyui'),],
-}
+    content: [
+        './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
+        './storage/framework/views/*.php',
+        './resources/views/**/*.blade.php',
+    ],
+    daisyui:{
+      themes: ["synthwave"],
+    }
+    ,
+    theme: {
+        extend: {
+            fontFamily: {
+                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+            },
+        },
+    },
 
+    plugins: [require('@tailwindcss/forms'),require('daisyui'),],
+};
