@@ -7,16 +7,26 @@ use App\Models\Driver;
 use App\Models\Country;
 use Config;
 use Illuminate\Support\Facades\DB;
-
+use Session;
+use Auth;
 class DriverController extends Controller
 {
-    public function driver()
+    public function driver(Request $request)
     {
         $winsum = Driver::sum('wins');
         $champsum = Driver::sum('driverChampion');
         $paginate = Config::get('pagination.pagination');
-        $data = Driver::join('country', 'driver.country_id_country', '=', 'country.id_country')->select('driver.*', 'country.countryName as country_name')->orderBy('driver.id_driver')->paginate($paginate);
-        return view('driver', ['data' => $data, 'winsum' => $winsum, 'champsum' => $champsum ]);
+        $data = Driver::join('country', 'driver.country_id_country', '=', 'country.id_country')
+                      ->select('driver.*', 'country.countryName as country_name')
+                      ->orderBy('driver.id_driver')
+                      ->paginate($paginate);
+
+        return view('driver', [
+            'data' => $data, 
+            'winsum' => $winsum, 
+            'champsum' => $champsum
+
+        ]);
     }
     
     public function delete($id_driver)
@@ -50,12 +60,12 @@ class DriverController extends Controller
         $country = Country::find($request->input('country'))->countryName;
         $driver->save();
         $request->session()->flash('success', "Řidič byl upraven na {$driver->name}, ze země {$country}!");
-        return redirect('/driver'); 
+        return redirect ('/'); 
         }
         catch (\Exception $e)  {
             $driver = Driver::findOrFail($id);
             $request->session()->flash('error', "Nastala chyba při editaci řidiče {$driver->name}! {$e->getMessage()}");
-            return redirect('/driver'); 
+            return redirect ('/'); 
         }
     
     }
@@ -82,12 +92,12 @@ class DriverController extends Controller
             $country = Country::find($request->input('country'))->countryName;
             $request->session()->flash('success', "Řidič {$driver->name} ze země {$country} byl přidán!");
 
-            return redirect('/driver'); 
+            return redirect ('/'); 
         } catch (\Exception $e) {
 
             $request->session()->flash('error', "Nastala chyba při přidávání řidiče! {$e->getMessage()}");
     
-            return redirect('/driver');
+            return redirect ('/');
         }
     }
 }

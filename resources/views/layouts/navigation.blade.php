@@ -35,17 +35,27 @@
 
                     <x-slot name="content">
                         <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Profile') }}
+                            {{ __('Profil') }}
                         </x-dropdown-link>
-
-                        <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
 
                             <x-dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                {{ __('Log Out') }}
+                                {{ __('Odhlásit se') }}
+                            </x-dropdown-link>
+                            <x-dropdown-link :href="route('driver.create')">
+                                {{ __('Přidávání řidičů') }}
+                            </x-dropdown-link>
+                            <x-dropdown-link :href="route('country.create')">
+                                {{ __('Přidávání zemí') }}
+                            </x-dropdown-link>
+                            <x-dropdown-link :href="route('driver')">
+                                {{ __('Řidiči') }}
+                            </x-dropdown-link>
+                            <x-dropdown-link :href="route('country')">
+                                {{ __('Země') }}
                             </x-dropdown-link>
                         </form>
                     </x-slot>

@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-    if (window.location.pathname === '/driver') {
+    if (window.location.pathname === '/') {
         var modal = document.getElementById("myModal");
         var form = document.getElementById('deleteForm');
         var deleteButton = document.getElementById('deleteButton1');
@@ -18,8 +18,6 @@ document.addEventListener('DOMContentLoaded', function () {
         var modalHandler = {
             openModal: this.setFormAction
         };
-
-        // Assuming there is only one button with the ID 'deleteButton1'
         var btn = document.getElementById('deleteButton1');
         btn.addEventListener('click', function() {
             var driverId = this.dataset.id;

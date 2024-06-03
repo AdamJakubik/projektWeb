@@ -25,15 +25,22 @@
       </div>
       <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
         <div class="flex flex-shrink-0 items-center">
-          <h1>F1 Web</h1>
+          <a href="/"><h1>F1 Web</h1></a>
         </div>
         <div class="hidden sm:ml-6 sm:block">
           <div class="flex space-x-4">
             <a href="/dashboard" class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Dashboard</a>
-            <a href="/driver" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Řidiči</a>
+            <a href="/" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Řidiči</a>
             <a href="/country" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Země</a>
             <a href="/drivers/create" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Přidání řidiče</a>
             <a href="/country/create" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Přidání země</a>
+            @guest
+            <a href="/login" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Přihlášení</a>
+            <a href="/register" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Registrace</a>
+            @endguest
+            @auth
+            <div class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Jméno uživatele: {{ Auth::user()->name }} </div>
+            @endauth  
           </div>
         </div>
       </div>

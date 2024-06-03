@@ -22,18 +22,18 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::delete('/driver/{id_driver}', [DriverController::class, 'delete']);
+    Route::get('/{name}/{id}/edit', [DriverController::class, 'edit']);
+    Route::put('/drivers/{id}', [DriverController::class, 'update']);
+    Route::get('/drivers/create', [DriverController::class, 'create'])->name('driver.create');
+    Route::post('/drivers', [DriverController::class, 'store']);
+    Route::delete('/country/delete/{id}', [CountryController::class, 'delete']);
+    Route::get('/country/create', [CountryController::class, 'create'])->name('country.create');
+    Route::post('/country/add', [CountryController::class, 'save']);
 });
-Route::get('/driver', [DriverController::class, 'driver']);
-Route::delete('/driver/{id_driver}', [DriverController::class, 'delete']);
-Route::get('/{name}/{id}/edit', [DriverController::class, 'edit']);
-Route::put('/drivers/{id}', [DriverController::class, 'update']);
-Route::get('/drivers/create', [DriverController::class, 'create']);
-Route::post('/drivers', [DriverController::class, 'store']);
-Route::delete('/country/delete/{id}', [CountryController::class, 'delete']);
-Route::get('/country/create', [CountryController::class, 'create']);
-Route::post('/country/add', [CountryController::class, 'save']);
-Route::get('/country', [CountryController::class, 'country']);
 
+Route::get('/', [DriverController::class, 'driver'])->name('driver');
+Route::get('/country', [CountryController::class, 'country'])->name('country');
 
 
 

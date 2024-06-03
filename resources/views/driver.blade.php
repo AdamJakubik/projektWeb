@@ -1,6 +1,7 @@
 @extends('layouts.app2')
 @section('content')
 <br>
+
 @if (session('success'))
     <br>
     <div class="alert alert-success">
